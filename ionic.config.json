@@ -1,0 +1,7 @@
+{
+  "name": "RunnerApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
