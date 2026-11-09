@@ -1,0 +1,136 @@
+:host {
+  --azul-runner: #5785f7;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: #080808;
+}
+
+ion-content {
+  --background: #fff;
+  --color: #080808;
+}
+.destaque {
+  color: var(--azul-runner);
+}
+.botao-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.botao-icone ion-icon {
+  font-size: 24px;
+}
+button:focus-visible,
+.lista-rotas:focus-visible {
+  outline: 2px solid var(--azul-runner);
+  outline-offset: 3px;
+}
+.pagina-inicial {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 17px 18px 36px;
+}
+.boas-vindas {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1,
+h2 {
+  font-size: 14px;
+  font-weight: 500;
+}
+.boas-vindas h1 {
+  margin: 7px 0 6px;
+}
+.boas-vindas p {
+  color: #737373;
+  font-size: 13px;
+}
+.notificacoes {
+  color: #777;
+}
+.notificacoes ion-icon {
+  border: 1px solid #c4c4c4;
+  border-radius: 3px;
+}
+.status {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 68px 13px;
+  min-height: 123px;
+  padding: 12px 14px 20px;
+  border: 1px solid #8ca0c3;
+  border-radius: 8px;
+  background: var(--azul-runner);
+  color: #fff;
+}
+.status::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 25px;
+  background: rgb(255 255 255 / 35%);
+}
+.status h2 {
+  text-align: center;
+  margin-bottom: 14px;
+}
+.status p {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.4;
+  padding-right: 15px;
+}
+.status p + p {
+  margin-top: 8px;
+}
+.rotas h2 {
+  margin: 0 8px 24px;
+}
+.lista-rotas {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  margin-right: -18px;
+  padding: 0 18px 5px 0;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.lista-rotas::-webkit-scrollbar {
+  display: none;
+}
+.link-rota {
+  flex: 0 0 209px;
+  scroll-snap-align: start;
+  text-decoration: none;
+}
+.corridas {
+  margin: 24px 0 0 6px;
+}
+.corridas h2 {
+  margin: 0 7px 14px;
+}
+.link-corrida {
+  display: block;
+  margin-top: 12px;
+  text-decoration: none;
+}
+.link-corrida:focus-visible {
+  outline: 2px solid #244ba5;
+  outline-offset: 3px;
+}

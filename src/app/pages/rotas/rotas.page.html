@@ -1,0 +1,80 @@
+<app-cabecalho />
+<ion-content>
+  <main class="pagina-rotas">
+    <div class="titulo">
+      <h1>Minhas Rotas</h1>
+      <button class="adicionar" type="button" (click)="abrirCadastro()">
+        <span aria-hidden="true">＋</span> Adicionar Rota
+      </button>
+    </div>
+    <section class="lista" aria-label="Rotas cadastradas">
+      @for (rota of rotasService.rotas(); track rota.id) {
+      <app-cartao-rota [rota]="rota" />
+      } @empty {
+      <p>Você ainda não tem rotas. Toque em Adicionar Rota para começar.</p>
+      }
+    </section>
+  </main>
+</ion-content>
+<app-navegacao pagina="rotas" />
+
+<ion-modal [isOpen]="aberto()" (didDismiss)="fecharCadastro()" aria-labelledby="titulo-cadastro">
+  <ng-template>
+    <ion-content>
+      <form class="cadastro" (ngSubmit)="salvar()">
+        <div class="titulo-modal">
+          <h2 id="titulo-cadastro">Adicionar Rota</h2>
+          <button class="fechar" type="button" aria-label="Fechar cadastro" (click)="fecharCadastro()">×</button>
+        </div>
+        <label for="nome-rota">Nome da rota</label>
+        <input
+          id="nome-rota"
+          name="nome"
+          [(ngModel)]="nome"
+          placeholder="Ex.: Rota do parque"
+          maxlength="60"
+          required
+        />
+        <app-pontos-rota (percursoChange)="percurso.set($event); erro.set('')" />
+        <p class="legenda">Capa da rota</p>
+        <div class="previa">
+          @if (foto()) { <img [src]="foto()" alt="Prévia da foto da rota" /> } @else if (percurso(); as trajeto) {
+          <app-mapa-rota [percurso]="trajeto" /> } @else { <span>Defina os pontos e gere o mapa</span> }
+        </div>
+        <div class="acoes-foto">
+          <button type="button" (click)="galeria.click()" [disabled]="processandoFoto()">Escolher foto</button>
+          <button type="button" (click)="camera.click()" [disabled]="processandoFoto()">Tirar foto</button>
+          <button type="button" (click)="usarFundoPadrao()">Usar mapa da rota</button>
+        </div>
+        <input
+          #galeria
+          type="file"
+          accept="image/*"
+          hidden
+          aria-label="Selecionar foto da galeria"
+          (change)="selecionarFoto($event)"
+        />
+        <input
+          #camera
+          type="file"
+          accept="image/*"
+          capture="environment"
+          hidden
+          aria-label="Tirar foto da rota"
+          (change)="selecionarFoto($event)"
+        />
+        @if (processandoFoto()) {
+        <p role="status">Preparando foto…</p>
+        } @if (erro()) {
+        <p class="erro" role="alert">{{ erro() }}</p>
+        }
+        <div class="acoes">
+          <button type="button" (click)="fecharCadastro()">Cancelar</button
+          ><button class="salvar" type="submit" [disabled]="!nome.trim() || processandoFoto() || !percurso()">
+            Salvar rota
+          </button>
+        </div>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

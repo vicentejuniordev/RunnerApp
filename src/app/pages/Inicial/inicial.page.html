@@ -1,3 +1,44 @@
-<ion-content [fullscreen]="true">
-  <h1>Initial Page</h1>
+<app-cabecalho />
+
+<ion-content>
+  <main class="pagina-inicial">
+    <section class="boas-vindas" aria-label="Boas-vindas">
+      <div>
+        <h1><span class="destaque">Olá,</span> {{ usuario.nome }}</h1>
+        <p>Bem-vindo, Runner</p>
+      </div>
+      <button
+        class="botao-icone notificacoes"
+        type="button"
+        aria-label="Ver notificações"
+        (click)="mostrarAviso('Você não tem novas notificações.')"
+      >
+        <ion-icon name="notifications-outline" aria-hidden="true"></ion-icon>
+      </button>
+    </section>
+    <section class="status" aria-labelledby="titulo-status">
+      <h2 id="titulo-status">Status de Hoje</h2>
+      <p>Velocidade Média: {{ status.velocidade }}</p>
+      <p>Distância Percorrida: {{ status.distancia }}</p>
+      <p>Clima: {{ status.clima }}</p>
+    </section>
+    <section class="rotas" aria-labelledby="titulo-rotas">
+      <h2 id="titulo-rotas">Minhas Rotas</h2>
+      <div class="lista-rotas" tabindex="0" aria-label="Rotas disponíveis; deslize para ver mais">
+        @for (rota of rotasService.rotas(); track rota.id) {
+        <app-cartao-rota class="link-rota" [rota]="rota" [navegavel]="true" />
+        }
+      </div>
+    </section>
+    <section class="corridas" aria-labelledby="titulo-corridas">
+      <h2 id="titulo-corridas">Corridas</h2>
+      @for (corrida of historico.corridas().slice(0, 3); track corrida.id) {
+      <a class="link-corrida" routerLink="/corridas" [attr.aria-label]="'Ver corrida ' + corrida.nome"
+        ><app-cartao-corrida [corrida]="corrida"
+      /></a>
+      }
+    </section>
+  </main>
 </ion-content>
+
+<app-navegacao pagina="inicial" />

@@ -1,0 +1,165 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: #080808;
+}
+ion-content {
+  --background: #fff;
+  --color: #080808;
+}
+.pagina-rotas {
+  position: relative;
+  min-height: 100%;
+  padding: 38px 34px 80px;
+  max-width: 540px;
+  margin: 0 auto;
+}
+.pagina-rotas::before,
+.pagina-rotas::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 157px;
+  background: #5785f7;
+  pointer-events: none;
+}
+.pagina-rotas::before {
+  left: 0;
+  top: 65%;
+}
+.pagina-rotas::after {
+  right: 0;
+  top: 72%;
+}
+.titulo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+h1 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+button {
+  cursor: pointer;
+  font: inherit;
+}
+.adicionar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: #5785f7;
+  color: #fff;
+  font-size: 9px;
+  white-space: nowrap;
+}
+.adicionar span {
+  font-size: 16px;
+}
+.lista {
+  display: grid;
+  gap: 34px;
+}
+ion-modal {
+  --width: min(100%, 480px);
+  --height: min(90%, 660px);
+  --border-radius: 14px;
+}
+.cadastro {
+  padding: 24px;
+}
+.titulo-modal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+h2 {
+  margin: 0;
+  font-size: 20px;
+}
+.fechar {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  color: #333;
+  font-size: 28px;
+}
+label,
+.legenda {
+  display: block;
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+input[name='nome'] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  background: #fff;
+  color: #080808;
+}
+.legenda {
+  margin-top: 24px;
+}
+.previa {
+  display: grid;
+  place-items: center;
+  min-height: 130px;
+  overflow: hidden;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+}
+.previa img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.acoes-foto,
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+.acoes-foto button,
+.acoes button {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #edf2ff;
+  color: #244ba5;
+  font-size: 13px;
+}
+.acoes {
+  justify-content: flex-end;
+  margin-top: 28px;
+}
+.acoes .salvar {
+  background: #5785f7;
+  color: #fff;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #244ba5;
+  outline-offset: 3px;
+}
+.erro {
+  color: #b42318;
+  font-size: 13px;
+}
+@media (max-width: 340px) {
+  .pagina-rotas {
+    padding-inline: 26px;
+  }
+}

@@ -1,0 +1,75 @@
+<app-cabecalho />
+<ion-content>
+  <main>
+    <div class="titulo">
+      <h1>Corridas</h1>
+      <button class="adicionar" type="button" (click)="escolhendo.set(true)">
+        <span aria-hidden="true">＋</span> Adicionar Corrida
+      </button>
+    </div>
+    <section class="lista" aria-label="Corridas realizadas">
+      @for (corrida of historico.corridas(); track corrida.id) {
+      <button
+        class="registro"
+        type="button"
+        (click)="selecionada.set(corrida)"
+        [attr.aria-label]="'Ver corrida ' + corrida.nome"
+      >
+        <app-cartao-corrida [corrida]="corrida" />
+      </button>
+      } @empty {
+      <p>Nenhuma corrida realizada. Escolha uma rota para começar.</p>
+      }
+    </section>
+  </main>
+</ion-content>
+<app-navegacao pagina="corridas" />
+
+<ion-modal [isOpen]="escolhendo()" (didDismiss)="escolhendo.set(false)" aria-labelledby="titulo-escolha">
+  <ng-template
+    ><ion-content
+      ><div class="modal">
+        <div class="titulo">
+          <h2 id="titulo-escolha">Escolher rota</h2>
+          <button type="button" (click)="escolhendo.set(false)">Fechar</button>
+        </div>
+        @for (rota of rotasDisponiveis(); track rota.id) {
+        <div class="escolha">
+          <h3>{{ rota.nome }}</h3>
+          <button type="button" (click)="escolherRota(rota.id)" [attr.aria-label]="'Iniciar rota ' + rota.nome">
+            Iniciar rota
+          </button>
+        </div>
+        } @empty {
+        <p>Cadastre uma rota com início e chegada antes de iniciar uma corrida.</p>
+        <button type="button" (click)="escolherRota(null)">Cadastrar rota</button> }
+      </div></ion-content
+    ></ng-template
+  >
+</ion-modal>
+
+<ion-modal [isOpen]="selecionada() !== null" (didDismiss)="selecionada.set(null)" aria-labelledby="titulo-detalhes">
+  <ng-template
+    ><ion-content
+      ><div class="modal">
+        @if (selecionada(); as corrida) {
+        <div class="titulo">
+          <h2 id="titulo-detalhes">{{ corrida.nome }}</h2>
+          <button type="button" (click)="selecionada.set(null)">Fechar</button>
+        </div>
+        <p>{{ corrida.fim | date:'dd/MM/yyyy HH:mm' }}</p>
+        @if (corrida.exemplo) {
+        <p>Dados de exemplo para apresentação do layout.</p>
+        } @if (corrida.percurso; as percurso) { <app-mapa-rota [percurso]="percurso" [trilha]="corrida.trilha" /> }
+        <app-metricas-corrida
+          [distancia]="corrida.distanciaMetros"
+          [duracao]="corrida.duracaoSegundos"
+          [passos]="corrida.passos"
+          [calorias]="corrida.calorias"
+        />
+        @if (corrida.foto) {
+        <img class="foto" [src]="corrida.foto" alt="Registro fotográfico da corrida com métricas" /> } }
+      </div></ion-content
+    ></ng-template
+  >
+</ion-modal>

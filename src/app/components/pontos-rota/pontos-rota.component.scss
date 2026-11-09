@@ -1,0 +1,85 @@
+:host {
+  display: block;
+  margin-top: 22px;
+}
+fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+legend {
+  font-size: 16px;
+  font-weight: 600;
+}
+label {
+  display: block;
+  margin: 16px 0 8px;
+  font-size: 14px;
+}
+.busca {
+  display: flex;
+  gap: 6px;
+}
+input {
+  min-width: 0;
+  width: 100%;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+  color: #080808;
+}
+button {
+  padding: 10px;
+  border-radius: 8px;
+  background: #edf2ff;
+  color: #244ba5;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.botoes button:last-child {
+  background: #5785f7;
+  color: #fff;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #244ba5;
+  outline-offset: 2px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0;
+}
+li button {
+  width: 100%;
+  margin-top: 4px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+p {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.ajuda {
+  color: #666;
+}
+.confirmado {
+  color: #168253;
+  margin: 6px 0;
+}
+.erro {
+  color: #b42318;
+}

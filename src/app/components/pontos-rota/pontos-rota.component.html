@@ -1,0 +1,54 @@
+<fieldset>
+  <legend>Trajeto da rota</legend>
+  <p class="ajuda">
+    Busque um endereço com a cidade ou informe latitude, longitude. Confirme cada ponto nos resultados.
+  </p>
+  @for (campo of campos; track campo.id) {
+    <label [for]="'ponto-' + campo.id">{{ campo.titulo }}</label>
+    <div class="busca">
+      <input
+        [id]="'ponto-' + campo.id"
+        [name]="campo.id"
+        [ngModel]="consulta[campo.id]"
+        [ngModelOptions]="{ standalone: true }"
+        (ngModelChange)="alterar(campo.id, $event)"
+        [disabled]="ocupado()"
+        placeholder="Ex.: Parque do Cocó, Fortaleza"
+        autocomplete="off"
+      />
+      <button
+        type="button"
+        [attr.aria-label]="'Buscar ' + campo.titulo"
+        [disabled]="ocupado() || !consulta[campo.id].trim()"
+        (click)="buscar(campo.id)"
+      >
+        Buscar
+      </button>
+    </div>
+    @if (pontos()[campo.id]; as ponto) {
+      <p class="confirmado">✓ {{ ponto.latitude.toFixed(5) }}, {{ ponto.longitude.toFixed(5) }}</p>
+    }
+    @if (resultados()[campo.id].length) {
+      <ul [attr.aria-label]="'Resultados para ' + campo.titulo">
+        @for (ponto of resultados()[campo.id]; track $index) {
+          <li>
+            <button type="button" [disabled]="ocupado()" (click)="selecionar(campo.id, ponto)">{{ ponto.nome }}</button>
+          </li>
+        }
+      </ul>
+    }
+  }
+  <div class="botoes">
+    <button type="button" (click)="usarLocalizacao()" [disabled]="ocupado()">Usar localização atual no início</button
+    ><button type="button" (click)="gerar()" [disabled]="ocupado() || !pontos().inicio || !pontos().chegada">
+      Gerar mapa da rota
+    </button>
+  </div>
+  @if (status()) {
+    <p role="status">{{ status() }}</p>
+  }
+  @if (erro()) {
+    <p class="erro" role="alert">{{ erro() }}</p>
+  }
+  <p class="ajuda">Busca: Photon · Trajeto a pé: FOSSGIS / OpenStreetMap. Requer internet.</p>
+</fieldset>

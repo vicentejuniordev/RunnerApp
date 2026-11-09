@@ -1,0 +1,65 @@
+<app-cabecalho />
+<ion-content>
+  <main>
+    <a routerLink="/corridas">← Corridas</a>
+    @if (rota(); as rotaAtual) {
+    <h1>{{ rotaAtual.nome }}</h1>
+    @if (rotaAtual.percurso; as percurso) {
+    <app-mapa-rota [percurso]="percurso" [trilha]="acompanhamento.trilha()" />
+    <p class="legenda">Azul: rota planejada · Verde: percurso registrado pelo GPS.</p>
+    @if (acompanhamento.estado() === 'pronto' || acompanhamento.estado() === 'iniciando') {
+    <label for="peso-corredor">Seu peso (kg), para estimar calorias</label>
+    <input
+      id="peso-corredor"
+      type="number"
+      [(ngModel)]="peso"
+      min="20"
+      max="300"
+      [disabled]="acompanhamento.estado() === 'iniciando'"
+    />
+    <p class="legenda">Mantenha esta tela aberta durante a corrida. Autorize o GPS e o movimento quando solicitado.</p>
+    <button class="principal" type="button" (click)="iniciar()" [disabled]="acompanhamento.estado() === 'iniciando'">
+      {{ acompanhamento.estado() === 'iniciando' ? 'Obtendo GPS…' : 'Iniciar rota' }}
+    </button>
+    }
+    <app-metricas-corrida
+      [distancia]="acompanhamento.distancia()"
+      [duracao]="acompanhamento.duracao()"
+      [passos]="acompanhamento.passos()"
+      [calorias]="acompanhamento.calorias()"
+    />
+    @if (acompanhamento.estado() === 'correndo') {
+    <p role="status">Corrida em andamento</p>
+    <p class="legenda">{{ acompanhamento.avisoMovimento() }}</p>
+    @if (acompanhamento.avisoGPS()) {
+    <p role="status">{{ acompanhamento.avisoGPS() }}</p>
+    }
+    <button class="finalizar" type="button" (click)="finalizar()">Finalizar rota</button>
+    } } @else {
+    <p>Esta rota de exemplo ainda não tem início e chegada. Cadastre uma rota com mapa para correr.</p>
+    <a routerLink="/rotas">Cadastrar rota</a> } @if (registro(); as corrida) {
+    <h2>{{ salva() ? 'Corrida salva!' : 'Corrida finalizada' }}</h2>
+    @if (!salva()) { <button type="button" (click)="salvarRegistro()">Tentar salvar corrida</button> } @if
+    (corrida.foto) { <img class="foto" [src]="corrida.foto" alt="Foto da corrida com suas métricas" /> } @if (salva()) {
+    <button type="button" (click)="abrirCamera()" [disabled]="perguntandoFoto()">
+      {{ corrida.foto ? 'Tirar outra foto' : 'Tirar foto da corrida' }}
+    </button>
+    @if (fotoPendente()) { <button type="button" (click)="salvarFoto()">Tentar salvar foto</button> }
+    <a class="ver-corridas" routerLink="/corridas"
+      >{{ fotoPendente() ? 'Continuar sem a nova foto' : 'Ver corridas realizadas' }}</a
+    >
+    } } } @else {
+    <h1>Rota não encontrada</h1>
+    <a routerLink="/rotas">Voltar para Minhas Rotas</a> } @if (erro()) {
+    <p class="erro" role="alert">{{ erro() }}</p>
+    }
+  </main>
+</ion-content>
+@if (cameraAberta()) { @if (registro(); as corrida) {
+<app-camera-corrida
+  [corrida]="corrida"
+  [flashSolicitado]="flash()"
+  (foto)="receberFoto($event)"
+  (cancelar)="cameraAberta.set(false)"
+/>
+} }

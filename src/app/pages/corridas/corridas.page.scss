@@ -1,0 +1,113 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: #080808;
+}
+ion-content {
+  --background: #fff;
+  --color: #080808;
+}
+main {
+  position: relative;
+  min-height: 100%;
+  max-width: 540px;
+  margin: auto;
+  padding: 40px 22px 80px;
+}
+main::before,
+main::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 157px;
+  background: #5785f7;
+  pointer-events: none;
+}
+main::before {
+  left: 0;
+  top: 56%;
+}
+main::after {
+  right: 0;
+  bottom: 0;
+}
+.titulo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 8px 43px;
+}
+h1 {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+h2 {
+  font-size: 18px;
+  margin: 0;
+}
+h3 {
+  font-size: 15px;
+}
+button {
+  cursor: pointer;
+  font: inherit;
+}
+.adicionar {
+  padding: 7px 9px;
+  border-radius: 8px;
+  background: #5785f7;
+  color: #fff;
+  font-size: 9px;
+}
+.adicionar span {
+  font-size: 15px;
+}
+.lista {
+  display: grid;
+  gap: 21px;
+}
+.registro {
+  display: block;
+  width: 100%;
+  background: transparent;
+  padding: 0;
+  border-radius: 9px;
+}
+ion-modal {
+  --width: min(100%, 540px);
+  --height: 90%;
+  --border-radius: 14px;
+}
+.modal {
+  padding: 24px;
+}
+.modal .titulo {
+  margin: 0 0 24px;
+}
+.modal button,
+.escolha a {
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #edf2ff;
+  color: #244ba5;
+  font-size: 13px;
+}
+.escolha {
+  padding: 10px 0 22px;
+  border-bottom: 1px solid #ddd;
+}
+a {
+  color: #244ba5;
+}
+.foto {
+  width: 100%;
+  border-radius: 8px;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #244ba5;
+  outline-offset: 3px;
+}
