@@ -1,0 +1,39 @@
+<ion-content [fullscreen]="true">
+
+  <ion-grid class="container">
+    <ion-row>
+      <!-- Canto superior esquerdo -->
+      <ion-col size="10" class="canto-superior">
+      </ion-col>
+    </ion-row>
+
+    <!-- Conteúdo central -->
+    <ion-row class="conteudo">
+      <!-- Dica: Use offset="3" ou gerencie o alinhamento no CSS da row para evitar decimais quebrados como 3.3 -->
+      <ion-col size="6" offset="3">
+
+        <ion-img src="../../assets/images/logo-runner.png" class="logo"></ion-img>
+
+        <!-- CORRIGIDO: Trocado ion-content por div -->
+        <div class="logo-container">
+          <ion-text color="primary" class="texto-central">
+            <h3>Bem-vindo ao Runner App!</h3>
+          </ion-text>
+        </div>
+
+        <br>
+        <ion-button expand="block" color="primary" routerLink="/inicial" class="botao-login">
+          Começar
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <!-- Canto inferior direito -->
+      <ion-col size="10" offset="2" class="canto-inferior">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

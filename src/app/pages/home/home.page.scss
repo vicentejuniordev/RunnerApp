@@ -1,0 +1,52 @@
+ion-content {
+  --background: #ffffff;
+}
+
+.container {
+  height: 100%;
+  position: relative;
+  padding: 20px;
+}
+
+/* CANTO SUPERIOR ESQUERDO */
+.canto-superior {
+  position: absolute;
+
+  top: 0px;
+  left: 0px;
+
+  height: 325px;
+
+  border-top: 20px solid #5785f7;
+  border-left: 22px solid #5785f7;
+}
+
+/* CONTEÚDO CENTRAL */
+.conteudo {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 100%;
+}
+
+/* CANTO INFERIOR DIREITO */
+.canto-inferior {
+  position: absolute;
+
+  bottom: 0px;
+  right: 0px;
+
+  height: 325px;
+
+  border-bottom: 20px solid #5785f7;
+  border-right: 22px solid #5785f7;
+}
+
+
+.texto-central {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #5785f7;
+}
+
